@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: kafapi
+
+server:
+  port : 8010
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, prometheus
+      base-path: /
+      path-mapping:
+        prometheus: metrics
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+        descriptions: true
+        pushgateway:
+          enabled: true
+
+kafka:
+  topicName: messages
+  bootstrapServers: http://192.168.0.38:9092
+  applicationId: app-appid-1
+  applicationServerHost: ${MY_POD_IP:localhost}
+  applicationServerPort: 8010
+  storeName: key-value-store
+  adminClientId: admin-clientid-1

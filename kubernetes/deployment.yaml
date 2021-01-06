@@ -1,0 +1,74 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: kafapi
+  labels:
+    app: kafapi
+spec:
+  selector:
+    app: kafapi
+  ports:
+    - name: web
+      port: 8010
+      nodePort: 30010
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafapi
+  namespace: default
+  labels:
+    app: kafapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafapi
+  template:
+    metadata:
+      labels:
+        app: kafapi
+    spec:
+      containers:
+        - name: kafapi
+          image: petecknight/kafapi:1
+          ports:
+            - name: web
+              containerPort: 8010
+          env:
+            - name: MY_POD_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8010
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8010
+            initialDelaySeconds: 20
+            periodSeconds: 20
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kafapi
+  namespace: default
+  labels:
+    app: kafapi
+    release: monitor-stack
+spec:
+  selector:
+    matchLabels:
+      app: kafapi
+  namespaceSelector:
+    any: true
+  endpoints:
+    - port: web
+      path: /metrics
+      interval: 10s

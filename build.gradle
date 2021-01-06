@@ -1,0 +1,44 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id "com.commercehub.gradle.plugin.avro" version "0.21.0"
+    id 'java'
+}
+
+apply plugin: "com.commercehub.gradle.plugin.avro-base"
+apply plugin: 'io.spring.dependency-management'
+
+group = 'me.petecknight'
+version = '1'
+sourceCompatibility = '1.8'
+
+ext {
+    confluentVersion='5.2.1'
+    kafkaVersion = '2.1.0'
+    kafkaScalaVersion='2.12'
+    scalaTestVersion='2.2.0-cp2'
+}
+
+repositories {
+    mavenCentral()
+}
+
+List web = ["org.springframework.boot:spring-boot-starter-web",
+            "org.springframework.boot:spring-boot-starter-actuator",
+            "io.micrometer:micrometer-core:1.6.2",
+            "io.micrometer:micrometer-registry-prometheus:1.6.2"
+]
+
+List streams = [ "org.apache.kafka:kafka-streams:2.0.0",
+                 "org.apache.kafka:kafka-clients:2.0.0"]
+dependencies {
+    implementation(web, streams)
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+}
+
+bootBuildImage {
+    imageName = "petecknight/${project.name}:${project.version}"
+}
+
+
