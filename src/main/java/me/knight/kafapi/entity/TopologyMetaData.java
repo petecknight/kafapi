@@ -1,4 +1,4 @@
-package com.bakdata.streams_store.entity;
+package me.knight.kafapi.entity;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
-package com.bakdata.streams_store.health;
+package me.knight.kafapi.health;
 
-import com.bakdata.streams_store.entity.TopologyMetaData;
-import com.bakdata.streams_store.entity.ProcessorMetadata;
+import me.knight.kafapi.entity.TopologyMetaData;
+import me.knight.kafapi.entity.ProcessorMetadata;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.Serdes;

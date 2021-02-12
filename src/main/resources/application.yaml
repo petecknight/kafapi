@@ -9,17 +9,18 @@ management:
   endpoints:
     web:
       exposure:
-        include: health, info, prometheus
-      base-path: /
-      path-mapping:
-        prometheus: metrics
+        include: health, info, metrics, prometheus
   metrics:
+    web:
+      server:
+        request:
+          autotime:
+            enabled: true
     export:
-      prometheus:
-        enabled: true
-        descriptions: true
-        pushgateway:
-          enabled: true
+      statsd:
+        host: "localhost"
+        port: 8125
+        protocol: "udp"
 
 kafka:
   topicName: messages

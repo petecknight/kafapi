@@ -1,4 +1,4 @@
-package com.bakdata.streams_store.health;
+package me.knight.kafapi.health;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -13,6 +13,6 @@ do
 
    echo "sending key: $key with value: $value "
 
-   http -j POST localhost:30010/messages key=$key value=$value
+   http -j POST localhost:8010/messages key=$key value=$value
 
 done

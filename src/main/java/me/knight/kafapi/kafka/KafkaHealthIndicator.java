@@ -1,4 +1,4 @@
-package com.bakdata.streams_store.kafka;
+package me.knight.kafapi.kafka;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

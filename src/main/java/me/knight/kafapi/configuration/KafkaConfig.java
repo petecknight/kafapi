@@ -1,7 +1,7 @@
-package com.bakdata.streams_store.configuration;
+package me.knight.kafapi.configuration;
 
-import com.bakdata.streams_store.service.ContyStateRestorationListener;
-import com.bakdata.streams_store.entity.TopologyMetaData;
+import me.knight.kafapi.service.KafkaStateRestorationListener;
+import me.knight.kafapi.entity.TopologyMetaData;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.binder.kafka.KafkaStreamsMetrics;
 import lombok.Data;
@@ -27,7 +27,7 @@ import java.util.Properties;
 @Configuration
 @ConfigurationProperties("kafka")
 @Data
-public class ContyConfig {
+public class KafkaConfig {
 
     private String applicationServerHost;
     private int applicationServerPort;
@@ -68,7 +68,7 @@ public class ContyConfig {
     }
 
     @Bean
-    public KafkaStreams streams(ContyStateRestorationListener contyStateRestorationListener, MeterRegistry meterRegistry){
+    public KafkaStreams streams(KafkaStateRestorationListener kafkaStateRestorationListener, MeterRegistry meterRegistry){
 
         final Properties properties = new Properties();
         properties.put(StreamsConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
@@ -89,7 +89,7 @@ public class ContyConfig {
 
         KafkaStreams streams = new KafkaStreams(builder.build(), properties);
         new KafkaStreamsMetrics(streams).bindTo(meterRegistry);
-        streams.setGlobalStateRestoreListener(contyStateRestorationListener);
+        streams.setGlobalStateRestoreListener(kafkaStateRestorationListener);
         return streams;
     }
 
@@ -97,10 +97,4 @@ public class ContyConfig {
     public TopologyMetaData topologyMetaData() {
         return new TopologyMetaData(topicName, storeName);
     }
-
-    @Bean
-    public RestTemplate restTemplate() {
-        return new RestTemplate();
-    }
-
 }

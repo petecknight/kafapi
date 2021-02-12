@@ -1,4 +1,4 @@
-package com.bakdata.streams_store.service;
+package me.knight.kafapi.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.common.TopicPartition;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class ContyStateRestorationListener implements StateRestoreListener {
+public class KafkaStateRestorationListener implements StateRestoreListener {
 
     @Override
     public void onRestoreStart(final TopicPartition topicPartition,

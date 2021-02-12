@@ -8,6 +8,6 @@ do
 
    echo "getting key: $key"
 
-   http -j GET localhost:30010/messages/$key
+   http -j GET localhost:8010/messages/$key
 
 done

@@ -1,10 +1,10 @@
-package com.bakdata.streams_store.service;
+package me.knight.kafapi.service;
 
 
-import com.bakdata.streams_store.health.StreamsService;
-import com.bakdata.streams_store.entity.KeyValueBean;
-import com.bakdata.streams_store.entity.ProcessorMetadata;
-import com.bakdata.streams_store.entity.TopologyMetaData;
+import me.knight.kafapi.health.StreamsService;
+import me.knight.kafapi.entity.KeyValueBean;
+import me.knight.kafapi.entity.ProcessorMetadata;
+import me.knight.kafapi.entity.TopologyMetaData;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -26,7 +26,7 @@ import static java.lang.String.format;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class ContyService {
+public class MessagesKeyValue {
 
     private static final String REMOTE_HOST_FORMAT_STRING = "http://%s:%d/%s/%s";
     private static final String RESOURCE_URL = "messages";
