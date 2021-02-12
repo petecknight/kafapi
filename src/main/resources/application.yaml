@@ -18,9 +18,8 @@ management:
             enabled: true
     export:
       statsd:
-        host: "localhost"
-        port: 8125
-        protocol: "udp"
+        host: 192.168.0.38
+        port: 8129
 
 kafka:
   topicName: messages
