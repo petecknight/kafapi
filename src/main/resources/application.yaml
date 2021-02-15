@@ -19,7 +19,7 @@ management:
     export:
       statsd:
         host: 192.168.0.38
-        port: 8129
+        port: 8125
 
 kafka:
   topicName: messages
